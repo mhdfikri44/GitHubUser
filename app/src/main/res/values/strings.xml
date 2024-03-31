@@ -6,7 +6,4 @@
     <string name="follower">Follower</string>
     <string name="following">Following</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="tes">TES</string>
-    <string name="add">ADD</string>
-    <string name="del">DELETE</string>
 </resources>
