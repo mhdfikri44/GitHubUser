@@ -16,17 +16,14 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // initial MainViewModel
         val mainViewModel = ViewModelProvider(
             this,
             ViewModelProvider.NewInstanceFactory()
         )[MainViewModel::class.java]
 
-        // set recyclerview
         val layoutManager = LinearLayoutManager(this)
         binding.rvUser.layoutManager = layoutManager
-
-        // search by user
+        
         with(binding) {
             searchView.setupWithSearchBar(searchBar)
             searchView.setupWithSearchBar(searchBar)

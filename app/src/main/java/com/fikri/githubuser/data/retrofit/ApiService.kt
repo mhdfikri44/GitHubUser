@@ -1,7 +1,6 @@
 package com.fikri.githubuser.data.retrofit
 
 import com.fikri.githubuser.data.response.DetailResponse
-import com.fikri.githubuser.data.response.FollowResponse
 import com.fikri.githubuser.data.response.FollowResponseItem
 import com.fikri.githubuser.data.response.GithubResponse
 import retrofit2.Call

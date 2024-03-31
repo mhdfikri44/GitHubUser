@@ -1,6 +1,5 @@
 package com.fikri.githubuser.ui
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +11,7 @@ import com.fikri.githubuser.data.response.DetailResponse
 import com.fikri.githubuser.databinding.ActivityDetailBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
@@ -29,7 +29,6 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // initial DetailViewModel
         val detailViewModel = ViewModelProvider(
             this,
             ViewModelProvider.NewInstanceFactory()
@@ -50,21 +49,22 @@ class DetailActivity : AppCompatActivity() {
         val viewPager: ViewPager2 = binding.viewPager
         viewPager.adapter = sectionsPagerAdapter
         val tabs: TabLayout = binding.tabs
-        // connect viewpager and tab
+
         TabLayoutMediator(tabs, viewPager) { tab, position ->
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
     }
 
-    @SuppressLint("SetTextI18n")
     private fun setDetailUser(detailUser: DetailResponse) {
-        binding.userName.text = detailUser.name
-        binding.userLogin.text = detailUser.login
-        binding.userFollower.text = "${detailUser.followers} Follower"
-        binding.userFollowing.text = "${detailUser.following} Following"
-        Glide.with(binding.root)
-            .load(detailUser.avatarUrl)
-            .into(binding.userImg)
+        with(binding){
+            userName.text = detailUser.name
+            userLogin.text = detailUser.login
+            "${detailUser.followers} Follower".also { userFollower.text = it }
+            "${detailUser.following} Following".also { userFollowing.text = it }
+            Glide.with(root)
+                .load(detailUser.avatarUrl)
+                .into(userImg)
+        }
     }
 
     private fun showLoading(isLoading: Boolean) {
