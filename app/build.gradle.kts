@@ -16,7 +16,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "KEY", "\"Token\"")
+        buildConfigField("String", "KEY", "\"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\"")
         buildConfigField("String", "BASE_URL", "\"https://api.github.com/\"")
     }
 
