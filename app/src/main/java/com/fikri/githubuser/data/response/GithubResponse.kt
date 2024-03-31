@@ -27,4 +27,7 @@ data class ItemsItem(
 
 	@field:SerializedName("avatar_url")
 	val avatarUrl: String,
+
+	@field:SerializedName("id")
+	val id: Int,
 )

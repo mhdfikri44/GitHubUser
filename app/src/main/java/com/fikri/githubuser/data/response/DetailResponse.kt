@@ -13,6 +13,9 @@ data class DetailResponse(
 	@field:SerializedName("login")
 	val login: String,
 
+	@field:SerializedName("id")
+	val id: Int,
+
 	@field:SerializedName("followers_url")
 	val followersUrl: String,
 
