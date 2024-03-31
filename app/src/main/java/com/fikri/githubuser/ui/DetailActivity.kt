@@ -12,7 +12,6 @@ import com.fikri.githubuser.databinding.ActivityDetailBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
-
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
 
