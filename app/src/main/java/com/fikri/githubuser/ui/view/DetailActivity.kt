@@ -1,4 +1,4 @@
-package com.fikri.githubuser.ui
+package com.fikri.githubuser.ui.view
 
 import android.os.Bundle
 import android.view.View
@@ -9,6 +9,8 @@ import com.bumptech.glide.Glide
 import com.fikri.githubuser.R
 import com.fikri.githubuser.data.response.DetailResponse
 import com.fikri.githubuser.databinding.ActivityDetailBinding
+import com.fikri.githubuser.ui.DetailViewModel
+import com.fikri.githubuser.ui.SectionPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 

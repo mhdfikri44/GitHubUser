@@ -1,4 +1,4 @@
-package com.fikri.githubuser.ui
+package com.fikri.githubuser.ui.view
 
 import android.os.Bundle
 import android.view.View
@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fikri.githubuser.data.response.ItemsItem
 import com.fikri.githubuser.databinding.ActivityMainBinding
+import com.fikri.githubuser.ui.MainViewModel
+import com.fikri.githubuser.ui.UserAdapter
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

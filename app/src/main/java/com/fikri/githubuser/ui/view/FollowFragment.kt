@@ -1,4 +1,4 @@
-package com.fikri.githubuser.ui
+package com.fikri.githubuser.ui.view
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -10,6 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fikri.githubuser.data.response.FollowResponseItem
 import com.fikri.githubuser.databinding.FragmentFollowBinding
+import com.fikri.githubuser.ui.FollowAdapter
+import com.fikri.githubuser.ui.FollowViewModel
 import kotlin.properties.Delegates
 
 class FollowFragment : Fragment() {
