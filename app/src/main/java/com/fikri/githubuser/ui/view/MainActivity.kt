@@ -1,10 +1,12 @@
 package com.fikri.githubuser.ui.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.fikri.githubuser.R
 import com.fikri.githubuser.data.response.ItemsItem
 import com.fikri.githubuser.databinding.ActivityMainBinding
 import com.fikri.githubuser.ui.MainViewModel
@@ -25,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this)
         binding.rvUser.layoutManager = layoutManager
-        
+
         with(binding) {
             searchView.setupWithSearchBar(searchBar)
             searchView.setupWithSearchBar(searchBar)
@@ -45,6 +47,22 @@ class MainActivity : AppCompatActivity() {
 
         mainViewModel.isLoading.observe(this) {
             showLoading(it)
+        }
+
+        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.menu_favorite -> {
+                    val intent = Intent(this, FavoriteActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+
+                R.id.menu_setting -> {
+                    false
+                }
+
+                else -> false
+            }
         }
     }
 

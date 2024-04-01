@@ -1,6 +1,5 @@
 package com.fikri.githubuser.ui.view
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -34,7 +33,6 @@ class FollowFragment : Fragment() {
         return binding.root
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.let {
@@ -42,11 +40,9 @@ class FollowFragment : Fragment() {
             username = it.getString(ARG_USERNAME).toString()
         }
 
-        // set recyclerview
         val layoutManager = LinearLayoutManager(requireContext())
         binding.rvFollow.layoutManager = layoutManager
 
-        // initial FollowViewModel
         val followViewModel = ViewModelProvider(
             this,
             ViewModelProvider.NewInstanceFactory()
