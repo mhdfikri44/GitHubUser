@@ -22,34 +22,34 @@ class DetailViewModel(private val db: DatabaseModule) : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    val resultSuksesFavorite = MutableLiveData<Boolean>()
-    val resultDeleteFavorite = MutableLiveData<Boolean>()
+    private val _isFavorite = MutableLiveData<Boolean>()
+    val isFavorite: LiveData<Boolean> = _isFavorite
 
     companion object {
         private const val TAG = "DetailViewModel"
     }
 
-    private var isFavorite = false
     fun setFavorite(item: ItemsItem?) {
         viewModelScope.launch {
             item?.let {
-                if (isFavorite) {
-                    db.favoriteUserDao.delete(item)
-                    resultDeleteFavorite.value = true
-                } else {
+                if (_isFavorite.value == false) {
                     db.favoriteUserDao.insert(item)
-                    resultSuksesFavorite.value = true
+                    _isFavorite.value = true
+                } else {
+                    db.favoriteUserDao.delete(item)
+                    _isFavorite.value = false
                 }
             }
-            isFavorite = !isFavorite
         }
     }
 
     fun findFavorite(id: Int, listenFavorite: () -> Unit) {
         viewModelScope.launch {
-            db.favoriteUserDao.findById(id)
-            listenFavorite()
-            isFavorite = true
+            val user = db.favoriteUserDao.findById(id)
+            if (user != null) {
+                listenFavorite()
+                _isFavorite.value = true
+            }
         }
     }
 

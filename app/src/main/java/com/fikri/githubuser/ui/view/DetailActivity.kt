@@ -1,10 +1,8 @@
 package com.fikri.githubuser.ui.view
 
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
-import androidx.annotation.ColorRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
@@ -16,7 +14,6 @@ import com.fikri.githubuser.data.response.ItemsItem
 import com.fikri.githubuser.databinding.ActivityDetailBinding
 import com.fikri.githubuser.ui.DetailViewModel
 import com.fikri.githubuser.ui.SectionPagerAdapter
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -59,21 +56,31 @@ class DetailActivity : AppCompatActivity() {
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
 
-
-        detailViewModel.resultSuksesFavorite.observe(this) {
-            binding.fabFavorite.changeIconColor(R.color.black)
-        }
-
-        detailViewModel.resultDeleteFavorite.observe(this) {
-            binding.fabFavorite.changeIconColor(R.color.white)
+        detailViewModel.findFavorite(username!!.id) {
+            binding.fabFavorite.setImageDrawable(
+                ContextCompat.getDrawable(
+                    binding.fabFavorite.context,
+                    R.drawable.favorite
+                )
+            )
         }
 
         binding.fabFavorite.setOnClickListener {
             detailViewModel.setFavorite(username)
         }
 
-        detailViewModel.findFavorite(username?.id ?: 0) {
-            binding.fabFavorite.changeIconColor(R.color.black)
+        detailViewModel.isFavorite.observe(this) {
+            val fab = binding.fabFavorite
+            if (it) {
+                fab.setImageDrawable(ContextCompat.getDrawable(fab.context, R.drawable.favorite))
+            } else {
+                fab.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        fab.context,
+                        R.drawable.favorite_border
+                    )
+                )
+            }
         }
     }
 
@@ -91,9 +98,5 @@ class DetailActivity : AppCompatActivity() {
 
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-    }
-
-    private fun FloatingActionButton.changeIconColor(@ColorRes color: Int) {
-        imageTintList = ColorStateList.valueOf(ContextCompat.getColor(this.context, color))
     }
 }
