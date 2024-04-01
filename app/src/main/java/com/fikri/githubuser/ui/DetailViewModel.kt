@@ -4,21 +4,53 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import com.fikri.githubuser.data.database.DatabaseModule
 import com.fikri.githubuser.data.response.DetailResponse
+import com.fikri.githubuser.data.response.ItemsItem
 import com.fikri.githubuser.data.retrofit.ApiConfig
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DetailViewModel : ViewModel() {
+class DetailViewModel(private val db: DatabaseModule) : ViewModel() {
     private val _detailUser = MutableLiveData<DetailResponse>()
     val detailUser: LiveData<DetailResponse> = _detailUser
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
+    val resultSuksesFavorite = MutableLiveData<Boolean>()
+    val resultDeleteFavorite = MutableLiveData<Boolean>()
+
     companion object {
         private const val TAG = "DetailViewModel"
+    }
+
+    private var isFavorite = false
+    fun setFavorite(item: ItemsItem?) {
+        viewModelScope.launch {
+            item?.let {
+                if (isFavorite) {
+                    db.favoriteUserDao.delete(item)
+                    resultDeleteFavorite.value = true
+                } else {
+                    db.favoriteUserDao.insert(item)
+                    resultSuksesFavorite.value = true
+                }
+            }
+            isFavorite = !isFavorite
+        }
+    }
+
+    fun findFavorite(id: Int, listenFavorite: () -> Unit) {
+        viewModelScope.launch {
+            db.favoriteUserDao.findById(id)
+            listenFavorite()
+            isFavorite = true
+        }
     }
 
     fun getDetailUser(username: String) {
@@ -28,7 +60,7 @@ class DetailViewModel : ViewModel() {
         client.enqueue(object : Callback<DetailResponse> {
             override fun onResponse(
                 call: Call<DetailResponse>,
-                response: Response<DetailResponse>
+                response: Response<DetailResponse>,
             ) {
                 _isLoading.value = false
                 if (response.isSuccessful) {
@@ -43,5 +75,9 @@ class DetailViewModel : ViewModel() {
                 Log.e(TAG, "onFailure: ${t.message}")
             }
         })
+    }
+
+    class Factory(private val db: DatabaseModule) : ViewModelProvider.NewInstanceFactory() {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T = DetailViewModel(db) as T
     }
 }

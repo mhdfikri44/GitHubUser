@@ -33,7 +33,7 @@ class UserAdapter : ListAdapter<ItemsItem, UserAdapter.MyViewHolder>(DIFF_CALLBA
 
         holder.itemView.setOnClickListener {
             val intentDetailUser = Intent(holder.itemView.context, DetailActivity::class.java)
-            intentDetailUser.putExtra("username", user.login)
+            intentDetailUser.putExtra("username", user)
             holder.itemView.context.startActivity(intentDetailUser)
 
             SectionPagerAdapter.USERNAME = user.login
