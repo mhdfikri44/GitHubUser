@@ -1,4 +1,4 @@
-package com.fikri.githubuser.ui
+package com.fikri.githubuser.ui.view
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

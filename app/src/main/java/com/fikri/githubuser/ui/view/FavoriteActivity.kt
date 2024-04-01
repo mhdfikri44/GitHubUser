@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.fikri.githubuser.data.database.DatabaseModule
 import com.fikri.githubuser.data.response.ItemsItem
 import com.fikri.githubuser.databinding.ActivityFavoriteBinding
-import com.fikri.githubuser.ui.FavoriteViewModel
 import com.fikri.githubuser.ui.UserAdapter
 
 class FavoriteActivity : AppCompatActivity() {

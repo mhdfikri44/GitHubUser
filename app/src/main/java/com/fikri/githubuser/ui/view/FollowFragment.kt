@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.fikri.githubuser.data.response.FollowResponseItem
 import com.fikri.githubuser.databinding.FragmentFollowBinding
 import com.fikri.githubuser.ui.FollowAdapter
-import com.fikri.githubuser.ui.FollowViewModel
 import kotlin.properties.Delegates
 
 class FollowFragment : Fragment() {

@@ -12,7 +12,6 @@ import com.fikri.githubuser.data.database.DatabaseModule
 import com.fikri.githubuser.data.response.DetailResponse
 import com.fikri.githubuser.data.response.ItemsItem
 import com.fikri.githubuser.databinding.ActivityDetailBinding
-import com.fikri.githubuser.ui.DetailViewModel
 import com.fikri.githubuser.ui.SectionPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator

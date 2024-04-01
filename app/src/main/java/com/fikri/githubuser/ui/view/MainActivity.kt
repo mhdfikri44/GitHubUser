@@ -4,16 +4,20 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fikri.githubuser.R
 import com.fikri.githubuser.data.response.ItemsItem
 import com.fikri.githubuser.databinding.ActivityMainBinding
-import com.fikri.githubuser.ui.MainViewModel
+import com.fikri.githubuser.databinding.ActivitySettingBinding
 import com.fikri.githubuser.ui.UserAdapter
+import com.fikri.githubuser.utils.SettingPreferences
+import com.fikri.githubuser.utils.dataStore
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var setting: ActivitySettingBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,10 +62,28 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.menu_setting -> {
-                    false
+                    val intent = Intent(this, SettingActivity::class.java)
+                    startActivity(intent)
+                    true
                 }
 
                 else -> false
+            }
+        }
+
+        setting = ActivitySettingBinding.inflate(layoutInflater)
+        val switchTheme = setting.switchTheme
+        val pref = SettingPreferences.getInstance(application.dataStore)
+        val settingViewModel =
+            ViewModelProvider(this, ViewModelFactory(pref))[SettingViewModel::class.java]
+
+        settingViewModel.getThemeSettings().observe(this) { isDarkModeActive: Boolean ->
+            if (isDarkModeActive) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                switchTheme.isChecked = true
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                switchTheme.isChecked = false
             }
         }
     }
