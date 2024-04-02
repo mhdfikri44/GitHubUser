@@ -37,7 +37,7 @@ class MainViewModel : ViewModel() {
             ) {
                 _isLoading.value = false
                 if (response.isSuccessful) {
-                    _listUser.value = response.body()?.items as List<ItemsItem>?
+                    _listUser.value = response.body()?.items
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }

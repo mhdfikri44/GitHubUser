@@ -1,5 +1,6 @@
 package com.fikri.githubuser.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -11,7 +12,6 @@ import com.fikri.githubuser.data.response.DetailResponse
 import com.fikri.githubuser.databinding.ActivityDetailBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
@@ -55,12 +55,13 @@ class DetailActivity : AppCompatActivity() {
         }.attach()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setDetailUser(detailUser: DetailResponse) {
-        with(binding){
+        with(binding) {
             userName.text = detailUser.name
             userLogin.text = detailUser.login
-            "${detailUser.followers} Follower".also { userFollower.text = it }
-            "${detailUser.following} Following".also { userFollowing.text = it }
+            userFollower.text = "${detailUser.followers} Follower"
+            userFollowing.text = "${detailUser.following} Following"
             Glide.with(root)
                 .load(detailUser.avatarUrl)
                 .into(userImg)

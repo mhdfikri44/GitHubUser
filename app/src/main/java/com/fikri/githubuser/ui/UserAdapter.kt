@@ -35,7 +35,7 @@ class UserAdapter : ListAdapter<ItemsItem, UserAdapter.MyViewHolder>(DIFF_CALLBA
             intentDetailUser.putExtra("username", user.login)
             holder.itemView.context.startActivity(intentDetailUser)
 
-            SectionPagerAdapter.USERNAME = user.login.toString()
+            SectionPagerAdapter.USERNAME = user.login
         }
     }
 
