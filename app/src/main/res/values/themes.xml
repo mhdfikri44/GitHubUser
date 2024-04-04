@@ -5,5 +5,9 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
+    <style name="TabText">
+        <item name="tabTextColor">@android:color/black</item>
+    </style>
+
     <style name="Theme.GitHubUser" parent="Base.Theme.GitHubUser" />
 </resources>

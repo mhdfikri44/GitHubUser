@@ -12,16 +12,6 @@ import com.fikri.githubuser.databinding.ItemUserBinding
 import com.fikri.githubuser.ui.view.DetailActivity
 
 class UserAdapter : ListAdapter<ItemsItem, UserAdapter.MyViewHolder>(DIFF_CALLBACK) {
-    class MyViewHolder(private val binding: ItemUserBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(user: ItemsItem) {
-            binding.userLogin.text = user.login
-            Glide.with(binding.root)
-                .load(user.avatarUrl)
-                .into(binding.userImg)
-        }
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding = ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(binding)
@@ -37,6 +27,16 @@ class UserAdapter : ListAdapter<ItemsItem, UserAdapter.MyViewHolder>(DIFF_CALLBA
             holder.itemView.context.startActivity(intentDetailUser)
 
             SectionPagerAdapter.USERNAME = user.login
+        }
+    }
+
+    class MyViewHolder(private val binding: ItemUserBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(user: ItemsItem) {
+            binding.userLogin.text = user.login
+            Glide.with(binding.root)
+                .load(user.avatarUrl)
+                .into(binding.userImg)
         }
     }
 

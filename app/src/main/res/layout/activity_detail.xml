@@ -106,7 +106,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/user_follower"
             app:layout_constraintVertical_bias="0.0"
-            app:tabTextColor="@android:color/black" />
+            style="@style/TabText" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager"

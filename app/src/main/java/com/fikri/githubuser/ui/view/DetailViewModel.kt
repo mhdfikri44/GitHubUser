@@ -49,6 +49,8 @@ class DetailViewModel(private val db: DatabaseModule) : ViewModel() {
             if (user != null) {
                 listenFavorite()
                 _isFavorite.value = true
+            } else {
+                _isFavorite.value = false
             }
         }
     }
