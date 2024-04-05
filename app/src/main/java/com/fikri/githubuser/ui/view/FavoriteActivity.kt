@@ -28,6 +28,13 @@ class FavoriteActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        favoriteViewModel.getUserFavorite().observe(this) {
+            setUserData(it)
+        }
+    }
+
     private fun setUserData(listUser: List<ItemsItem>) {
         val adapter = UserAdapter()
         adapter.submitList(listUser)
